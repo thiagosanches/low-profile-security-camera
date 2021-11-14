@@ -11,7 +11,7 @@ A very humble security camera, using bash and ImageMagick that sends alert to Te
 - ImageMagick installed on an Ubuntu 18.04 machine, you just need to run: `sudo apt-get install -y imagemagick`.
 
 ## Telegram integration
-This scripts uses an integration with Telegram, it sends the image A, B and the difference between them + a message with "Motion Detected!". Creating a bot on Telegram, it's pretty straightforward you can use the official BotFather. Once you created your bot, you need to replace the value `BOT_TOKEN_GOES_HERE` to whatever Telegram created for you!
+This scripts uses an integration with Telegram, it sends the image A, B and the difference between them + a message with "Motion Detected!". Creating a bot on Telegram, it's pretty straightforward you can use the official BotFather. Once you created your bot, you need to replace the value `BOT_TOKEN_GOES_HERE` to whatever Telegram prepared for you!
 
 ## Installation
 ```
