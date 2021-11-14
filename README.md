@@ -7,5 +7,5 @@ A very humble security camera, using bash and ImageMagick that sends alert to Te
 - ESP32 CAM
 
 ## Software
-- This [code](https://github.com/thiagosanches/iot-testing/blob/master/kmera-2/kmera-2.ino) was deployed on the ESP32CAM to serve as a camera.
-- ImageMagick installed on an Ubuntu 18.04 machine.
+- This [code](https://github.com/thiagosanches/iot-testing/blob/master/kmera-2/kmera-2.ino) was deployed on the ESP32CAM to serve as a camera, you can take a look on the guide [here](https://github.com/thiagosanches/iot-testing/blob/master/kmera-2/README.md).
+- ImageMagick installed on an Ubuntu 18.04 machine, you just need to run: `sudo apt-get install -y imagemagick`.
