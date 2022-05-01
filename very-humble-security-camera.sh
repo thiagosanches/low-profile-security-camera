@@ -8,8 +8,8 @@ MY_CELLPHONE="$5"
 
 while true
 do
-    # Am I at home? If so, we don't need to take pictures.
-    ping $MY_CELLPHONE -c 1
+    # Am I at home? If yeap, we don't need to take pictures.
+    ping $MY_CELLPHONE -c 1 && sleep 1
 
     if [[ $? -gt 0 ]]
     then
