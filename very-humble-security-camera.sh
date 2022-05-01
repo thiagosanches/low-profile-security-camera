@@ -2,6 +2,7 @@
 
 CAMERA_IP="$1"
 BOT_TOKEN="$2"
+CHAT_ID="$3"
 
 while true
 do
@@ -18,9 +19,9 @@ do
 
     if [[ $THRESHOLD -gt 3000 ]]
     then
-        curl "https://api.telegram.org/$BOT_TOKEN/sendMessage?chat_id=-CHAT_ID_GOES_HERE&text=Motion%20detected!";
-        curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=-CHAT_ID_GOES_HERE" -F photo=@"a.jpg"
-        curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=-CHAT_ID_GOES_HERE" -F photo=@"b.jpg"
-        curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=-CHAT_ID_GOES_HERE" -F photo=@"x.jpg"
+        curl "https://api.telegram.org/$BOT_TOKEN/sendMessage?chat_id=$CHAT_ID&text=Motion%20detected!";
+        curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"a.jpg"
+        curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"b.jpg"
+        curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"x.jpg"
     fi
 done
