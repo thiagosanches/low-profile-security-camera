@@ -20,9 +20,9 @@ do
 
     if [[ $THRESHOLD -gt $MY_THRESHOLD ]]
     then
-        curl "https://api.telegram.org/$BOT_TOKEN/sendMessage?chat_id=$CHAT_ID&text=Motion%20detected!";
-        curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"a.jpg"
-        curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"b.jpg"
-        curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"x.jpg"
+        curl "https://api.telegram.org/bot$BOT_TOKEN/sendMessage?chat_id=$CHAT_ID&text=Motion%20detected!";
+        curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"a.jpg"
+        curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"b.jpg"
+        curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"x.jpg"
     fi
 done
