@@ -22,6 +22,8 @@ do
     then
         # prepare an image with 3 images (left, right and diff) and datetime.
         montage -size 800x600 -label %f -geometry +4+4 -annotate +20+20 "$(date)" a.jpg b.jpg x.jpg total.jpg
-        curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"total.jpg"
+        convert total.jpg -quality 70% total-final.jpg
+        curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"total-final.jpg"
+        rm -rf a.jpg b.jpg x.jpg total.jpg total-final.jpg
     fi
 done
