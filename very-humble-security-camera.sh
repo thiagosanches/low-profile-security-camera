@@ -24,5 +24,10 @@ do
         curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"a.jpg"
         curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"b.jpg"
         curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"x.jpg"
+
+
+        # prepare an image with 3 images and datetime.
+        montage -size 800x600 -label %f -geometry +4+4 -annotate +20+20 "$(date)" a.jpg b.jpg x.jpg total.jpg
+        curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"total.jpg"
     fi
 done
