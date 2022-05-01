@@ -3,6 +3,7 @@
 CAMERA_IP="$1"
 BOT_TOKEN="$2"
 CHAT_ID="$3"
+MY_THRESHOLD="$4"
 
 while true
 do
@@ -17,7 +18,7 @@ do
     echo $RESULT
     echo $THRESHOLD
 
-    if [[ $THRESHOLD -gt 3000 ]]
+    if [[ $THRESHOLD -gt $MY_THRESHOLD ]]
     then
         curl "https://api.telegram.org/$BOT_TOKEN/sendMessage?chat_id=$CHAT_ID&text=Motion%20detected!";
         curl -X POST "https://api.telegram.org/$BOT_TOKEN/sendPhoto?chat_id=$CHAT_ID" -F photo=@"a.jpg"
