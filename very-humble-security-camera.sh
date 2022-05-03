@@ -11,7 +11,7 @@ do
     # Am I at home? If yeap, we don't need to take pictures.
     ping $MY_CELLPHONE -c 1 && sleep 1
 
-    if [[ $? -gt 0 ]]
+    if [[ $? -eq 0 ]]
     then
         curl "http://$CAMERA_IP/jpg" -o "a.jpg" --silent
         sleep 1
