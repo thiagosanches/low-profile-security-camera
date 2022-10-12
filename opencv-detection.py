@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-
 # initialize the HOG descriptor/person detector
 hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
