@@ -1,33 +1,40 @@
-import os
-from urllib.request import urlopen
-
 import cv2
-import cvlib as cv
 import numpy as np
-import requests
-from cvlib.object_detection import draw_bbox
 
-CHAT_ID = os.getenv('CHAT_ID')
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-CAMERA_IP = os.getenv('CAMERA_IP')
-TELEGRAM_URL = "https://api.telegram.org/bot" + \
-    BOT_TOKEN + "/sendPhoto?chat_id=" + CHAT_ID
 
-while(True):
-    img_resp = urlopen("http://" + CAMERA_IP + "/jpg")
-    imgnp = np.asarray(bytearray(img_resp.read()), dtype="uint8")
-    img = cv2.imdecode(imgnp, -1)
-    bbox, label, conf = cv.detect_common_objects(img)
-    print(label)
-    im = draw_bbox(img, bbox, label, conf)
+# initialize the HOG descriptor/person detector
+hog = cv2.HOGDescriptor()
+hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
-    if 'person' in label:
-        cv2.imwrite("photo.jpg", im)
-        with open("photo.jpg", 'rb') as image:
-            ret = requests.post(TELEGRAM_URL, files={"photo": image})
+from datetime import datetime
+video = cv2.VideoCapture('http://XXXXX:5000/video_feed')
+cv2.namedWindow('Camera', cv2.WINDOW_AUTOSIZE)
 
-    cv2.imshow("live", im)
-    if cv2.waitKey(1) == 113:
-        break
+while(video.isOpened()):
+    ret, img = video.read()
+
+    if ret == True:
+
+        # begin people detection
+        frame = cv2.resize(img, (640, 480))
+        gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+        boxes, weights = hog.detectMultiScale(frame, winStride=(8,8), padding=(10, 10), scale=1.02)
+        boxes = np.array([[x, y, x + w, y + h] for (x, y, w, h) in boxes])
+
+        # display the detected boxes in the colour picture
+        for (xA, yA, xB, yB) in boxes:
+            cv2.rectangle(frame, (xA, yA), (xB, yB), (0, 255, 0), 2)
+        cv2.imshow('Camera', frame)
+        # end people detection
+
+        # begin normal flow
+        #font = cv2.FONT_HERSHEY_PLAIN
+        #cv2.putText(img, str(datetime.now()), (20, 40), font, 2, (255, 255, 255), 2, cv2.LINE_AA)
+        #cv2.imshow('Camera', img)
+        # end normal flow
+
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            video.release()
+            break
 
 cv2.destroyAllWindows()
